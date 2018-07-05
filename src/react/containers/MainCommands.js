@@ -26,7 +26,7 @@ class Content extends Component {
         </h2>
         <ListWithFilter
           render={(query, sortBy) => (
-            <CommandList query={query} sortBy={sortBy} />
+            <CommandList query={query} sortBy={sortBy} compact withCounter />
           )}
           sortByOptions={sortByOptions}
           sortBy="most_popular"

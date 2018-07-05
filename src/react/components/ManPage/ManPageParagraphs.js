@@ -1,9 +1,15 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import ManPageSection from "./ManPageSection";
+import ManPageSynopsys from "./ManPageSynopsis";
+import ManPageOptions from "./ManPageOptions";
+import ManPageSubcommands from "./ManPageSubcommands";
+import ManPageAuthors from "./ManPageAuthors";
 
-const ManPageParagraphs = ({ paragraphs }) => {
+const ManPageParagraphs = ({ program, mode }) => {
   // get any paragraph whose section name include "option"
+  const { paragraphs } = program.manPage;
+  console.log(paragraphs);
+
   var sypnopsysParagraphs = paragraphs.filter(p =>
     p.section.match(/synopsis/i)
   );
@@ -14,27 +20,40 @@ const ManPageParagraphs = ({ paragraphs }) => {
   var subcommandsParagraphs = paragraphs.filter(p =>
     p.section.match(/command/i)
   );
+
+  // get any paragraph whose section name include the "command"
+  var authorParagraphs = paragraphs.filter(p => p.section.match(/author/i));
   return (
     <Fragment>
-      <a name="usage" />
       {sypnopsysParagraphs.length > 0 && (
-        <ManPageSection
-          name="Synopsis"
+        <ManPageSynopsys
+          programName={program.cliName}
           paragraphs={sypnopsysParagraphs}
-          counter={false}
         />
       )}
       {optionsParagraphs.length > 0 && (
-        <ManPageSection name="Options" paragraphs={optionsParagraphs} />
+        <ManPageOptions
+          programName={program.name}
+          paragraphs={optionsParagraphs}
+        />
       )}
       {subcommandsParagraphs.length > 0 && (
-        <ManPageSection name="Subcommands" paragraphs={subcommandsParagraphs} />
+        <ManPageSubcommands
+          programName={program.name}
+          paragraphs={subcommandsParagraphs}
+        />
+      )}
+      {authorParagraphs.length > 0 && (
+        <ManPageAuthors
+          programName={program.name}
+          paragraphs={authorParagraphs}
+        />
       )}
     </Fragment>
   );
 };
 ManPageParagraphs.propTypes = {
-  manPage: PropTypes.object,
+  program: PropTypes.object,
   mode: PropTypes.string
 };
 

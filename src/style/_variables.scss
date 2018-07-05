@@ -1,4 +1,4 @@
-$body-bg:  #F4F4F4;
+$body-bg:  #FCFCFB;
 
 // colors
 $dark: #151519;
@@ -11,10 +11,10 @@ $green-ultra-dark: #28a745;
 $green: #5cb85c;
 $green-dark: #449d44;
 $layout-border-color: #D5D5D5;
-
 $light-green: #93c83d;
 $dark-green: #10654a;
-$light-jade: #1aaa82;
+$light-jade: #188f73;
+
 
 $footer-bg: white;
 $footer-border-color: $layout-border-color;
@@ -26,8 +26,8 @@ $footer-link-color: #EEEEEE;
 $header-bg: #272822;
 $header-border-color: $layout-border-color;
 $header-font-color: white;
-$header-link-color: white;
-$header-link-color-hover: #28a746;
+$header-link-color: #111;
+$header-link-color-hover: black;
 $header-height: 50px;
 
 $kommandr-title-bg: $light-gray;
@@ -56,4 +56,5 @@ $search-input-icon-position: $search-input-font-size * 1.5;
 $search-input-icon-color: $light-dark;
 $search-input-placeholder-color: $light-dark;
 
-$link-color: $green-ultra-dark;
+$link-color-title: $dark;
+$link-color: $dark;

@@ -112,7 +112,7 @@ class ListWithFilter extends Component {
     return (
       <div className="list-with-filter">
         <div className="d-flex">
-          <div className=" pr-2 pl-0 flex-grow-1">
+          <div className=" pr-1 pl-0 flex-grow-1">
             <CreatableSelect
               components={components}
               inputValue={inputValue}
@@ -130,7 +130,7 @@ class ListWithFilter extends Component {
             />
           </div>
           {sortByOptions.length > 0 && (
-            <div className=" pr-0 pl-2">
+            <div className=" pr-0 pl-1">
               <SortButtons
                 color="success"
                 handleOnClick={this.handleRadioBtnClick}

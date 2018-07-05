@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import ProgramPreview from "./ProgramPreview";
+import { ListGroup, ListGroupItem } from "reactstrap";
 
 const SIMILAR_PROGRAMS_QUERY = gql`
   query programs($cliName: String!, $platformName: String, $k: Int!) {
@@ -20,11 +21,15 @@ const SIMILAR_PROGRAMS_QUERY = gql`
     }
   }
 `;
-const SimilarPrograms = ({ program, platformName }) => {
+const SimilarPrograms = ({ program, platformName, compact }) => {
+  var title = compact ? (
+    <h4>More related programs</h4>
+  ) : (
+    <h3>More related programs</h3>
+  );
   return (
     <div className="similar-commands">
-      <h3>Similar Programs</h3>
-      <p>Alternative programs with similar functionality</p>
+      {title}
       <Query
         query={SIMILAR_PROGRAMS_QUERY}
         variables={{ cliName: program, platformName, k: 6 }}
@@ -32,9 +37,19 @@ const SimilarPrograms = ({ program, platformName }) => {
         {({ loading, error, data: { programs } }) => {
           if (loading) return "Loading";
           if (error) return `Error: ${error}`;
-          return programs.map((program, idx) => (
-            <ProgramPreview key={program.id} program={program} mode="minimal" />
-          ));
+          return (
+            <ListGroup flush>
+              {programs.map((program, idx) => (
+                <ListGroupItem key={idx}>
+                  <ProgramPreview
+                    key={program.id}
+                    program={program}
+                    mode="minimal"
+                  />
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          );
         }}
       </Query>
     </div>
@@ -43,7 +58,11 @@ const SimilarPrograms = ({ program, platformName }) => {
 
 SimilarPrograms.propTypes = {
   program: PropTypes.string,
-  platformName: PropTypes.string
+  platformName: PropTypes.string,
+  compact: PropTypes.bool
 };
 
+SimilarPrograms.defaultProps = {
+  compact: false
+};
 export default SimilarPrograms;

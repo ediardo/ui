@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import CommandContent from "./CommandContent";
+import CommandInfo from "./CommandInfo";
+
 import {
   LabelContainer,
   LabelPlatform,
@@ -9,18 +11,28 @@ import {
   LabelUser
 } from "../Label";
 
-const CommandTitle = ({ children }) => {
-  return <h4 className="command-title">{children}</h4>;
+// TODO: Move this into CommandTitle.js component
+const CommandTitle = ({ minimal, compact, children }) => {
+  if (minimal) {
+    return <h5 className="command-title">{children}</h5>;
+  } else if (compact) {
+    return <h4 className="command-title">{children}</h4>;
+  }
 };
 
-const CommandInfo = ({ children }) => {
-  return <div className="command-info">{children}</div>;
+CommandTitle.propTypes = {
+  minimal: PropTypes.bool,
+  compact: PropTypes.bool
+};
+CommandTitle.defaultProps = {
+  minimal: false,
+  compact: false
 };
 
 const CommandPreviewMinimal = ({ command }) => {
   return (
     <Fragment>
-      <CommandTitle>
+      <CommandTitle minimal>
         <a href={`/@${command.author.username}/${command.slugTitle}`}>
           {command.title}
         </a>
@@ -39,7 +51,7 @@ const CommandPreviewMinimal = ({ command }) => {
 const CommandPreviewCompact = ({ command }) => {
   return (
     <Fragment>
-      <CommandTitle>
+      <CommandTitle compact>
         <a href={`/@${command.author.username}/${command.slugTitle}`}>
           {command.program.name} / {command.title}
         </a>
@@ -59,22 +71,24 @@ const CommandPreviewCompact = ({ command }) => {
   );
 };
 
-const CommandPreview = ({ command, mode }) => {
-  let preview =
-    mode === "minimal" ? (
-      <CommandPreviewMinimal command={command} />
-    ) : (
-      <CommandPreviewCompact command={command} />
-    );
-  return <div className="command mt-2 mb-2">{preview}</div>;
+const CommandPreview = ({ command, minimal, compact }) => {
+  let preview;
+  if (minimal) {
+    preview = <CommandPreviewMinimal command={command} />;
+  } else if (compact) {
+    preview = <CommandPreviewCompact command={command} />;
+  }
+  return <div className="command">{preview}</div>;
 };
 
 CommandPreview.propTypes = {
   command: PropTypes.object,
-  mode: PropTypes.string
+  minimal: PropTypes.bool,
+  compact: PropTypes.bool
 };
 
 CommandPreview.defaultProps = {
-  mode: "compact"
+  minimal: false,
+  compact: false
 };
 export default CommandPreview;

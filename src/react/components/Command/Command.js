@@ -9,14 +9,9 @@ import {
   LabelUser
 } from "../Label";
 import { Program } from "../Program";
-
-const CommandTitle = ({ children }) => {
-  return <h2 className="command-title">{children}</h2>;
-};
-
-const CommandInfo = ({ children }) => {
-  return <div className="command-info">{children}</div>;
-};
+import CommandTitle from "./CommandTitle";
+import CommandInfo from "./CommandInfo";
+import CommandDescription from "./CommandDescription";
 
 class Command extends Component {
   componentDidMount() {
@@ -29,10 +24,13 @@ class Command extends Component {
     const { command } = this.props;
     return (
       <div className="command mt-2 mb-2">
-        <CommandTitle>
-          {command.program.name} / {command.title}
-        </CommandTitle>
+        <CommandTitle
+          programName={command.program.cliName}
+          commandTitle={command.title}
+        />
+
         <CommandContent>{command.rawContent}</CommandContent>
+
         <CommandInfo>
           <LabelContainer inline={true}>
             <LabelUser user={command.author} />
@@ -40,8 +38,9 @@ class Command extends Component {
             <LabelPlatform platform={command.program.platformName} />
             <LabelMetric metric="views" value={command.totalViews} />
           </LabelContainer>
+          <CommandDescription description={command.description} />
         </CommandInfo>
-        <Program program={command.program} />
+        <Program program={command.program} compact />
       </div>
     );
   }

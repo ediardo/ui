@@ -8,6 +8,7 @@ import ViewManPage from "./ViewManPage";
 import ViewCommand from "./ViewCommand";
 import NoMatch from "./NoMatch";
 import { ModalWelcome } from "../components/Modal";
+import Footer from "../components/Footer/Footer";
 
 const hasSeenWelcome = document.cookie.includes("hasSeenWelcome");
 
@@ -24,6 +25,7 @@ const App = props => {
         </Switch>
         {!hasSeenWelcome && <ModalWelcome />}
       </Container>
+      <Footer />
     </Fragment>
   );
 };

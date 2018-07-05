@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faTwitter from "@fortawesome/fontawesome-free-brands/faTwitter";
-import faTerminal from "@fortawesome/fontawesome-free-solid/faTerminal";
 import { Link, withRouter } from "react-router-dom";
 import {
   Collapse,
@@ -20,20 +19,9 @@ class Header extends Component {
         <div className="container">
           <Navbar color="faded" expand="md" className="row">
             <NavbarBrand tag={Link} to={{ pathname: "/", state: "createNew" }}>
-              <img alt="logo" className="logo" src="/img/logo-black-bg.png" />
+              <img alt="logo" className="logo" src="/img/logo-white-bg.png" />
             </NavbarBrand>
             <Collapse navbar>
-              <Nav navbar>
-                <NavItem>
-                  <NavLink href="/" className="header-nav-button">
-                    <FontAwesomeIcon
-                      icon={faTerminal}
-                      className="header-nav-button-icon"
-                    />
-                    Commands
-                  </NavLink>
-                </NavItem>
-              </Nav>
               <Nav navbar className="ml-auto">
                 <NavItem>
                   <NavLink

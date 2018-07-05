@@ -6,7 +6,7 @@ const Paragraph = ({ p }) => {
   return <p dangerouslySetInnerHTML={{ __html: p.text.trim() }} />;
 };
 
-const ManPageSection = ({ name, paragraphs, counter }) => {
+const ManPageOptions = ({ programName, paragraphs, withCounter }) => {
   var sectionParagraphs = paragraphs.map((p, idx) => {
     return (
       <div className="section-paragraphs" key={idx}>
@@ -15,23 +15,24 @@ const ManPageSection = ({ name, paragraphs, counter }) => {
     );
   });
   return (
-    <div className={`manpage-section-${name.toLowerCase().replace(/ /g, "-")}`}>
-      <h2>
-        {name} {counter && <Badge color="dark">~{paragraphs.length}</Badge>}
-      </h2>
+    <div className="manpage-section-options mb-3">
+      <h3>
+        The options and parameters it takes{" "}
+        {withCounter && <Badge color="dark">~{paragraphs.length}</Badge>}
+      </h3>
       {sectionParagraphs}
     </div>
   );
 };
 
-ManPageSection.propTypes = {
-  name: PropTypes.string,
+ManPageOptions.propTypes = {
+  programName: PropTypes.string,
   paragraphs: PropTypes.array,
-  counter: PropTypes.bool
+  withCounter: PropTypes.bool
 };
 
-ManPageSection.defaultProps = {
-  counter: true
+ManPageOptions.defaultProps = {
+  withCounter: true
 };
 
-export default ManPageSection;
+export default ManPageOptions;

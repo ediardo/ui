@@ -11,6 +11,7 @@ const COMMAND_QUERY = gql`
       id
       title
       rawContent
+      description
       forkFrom
       totalViews
       createdAt

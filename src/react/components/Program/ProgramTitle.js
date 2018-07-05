@@ -1,28 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Badge } from "reactstrap";
 
-const ProgramTitle = ({ name, platformName, cliName }) => {
-  return (
-    <h2>
-      What does {name} do?{" "}
-      <Button
-        color="success"
-        size="sm"
-        tag={Link}
-        to={`/manpages/${platformName}/${name}`}
-      >
-        view manual page
-      </Button>
-    </h2>
-  );
+const ProgramTitle = ({ name, withBadge, compact }) => {
+  if (withBadge) {
+    name = <Badge color="success">{name}</Badge>;
+  }
+  if (compact) {
+    return <h3 className="program-title">What does the {name} program do? </h3>;
+  } else {
+    return <h2 className="program-title">What does the {name} program do?</h2>;
+  }
 };
 
 ProgramTitle.propTypes = {
   name: PropTypes.string,
-  cliName: PropTypes.string,
-  platformName: PropTypes.string
+  withBadge: PropTypes.bool,
+  compact: PropTypes.bool
+};
+
+ProgramTitle.defaultProps = {
+  withBadge: false,
+  compact: false
 };
 
 export default ProgramTitle;

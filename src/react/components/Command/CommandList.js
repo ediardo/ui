@@ -4,7 +4,7 @@ import { Query } from "react-apollo";
 import CommandPreview from "./CommandPreview";
 import gql from "graphql-tag";
 import _ from "underscore";
-
+import { ListGroup, ListGroupItem } from "reactstrap";
 const COMMANDS_QUERY = gql`
   query commands(
     $title: String
@@ -47,7 +47,7 @@ class CommandList extends Component {
   }
 
   render() {
-    const { query, sortBy } = this.props;
+    const { query, sortBy, compact, minimal, withCounter } = this.props;
     var title = _.findWhere(query, { key: undefined });
     if (title !== undefined) {
       title = title.value;
@@ -62,8 +62,8 @@ class CommandList extends Component {
         variables={{ title: title, programs, platforms, sortBy }}
       >
         {({ loading, error, data: { commands } }) => {
-          if (loading) return "loading...";
-          if (error) return "Error";
+          if (loading) return "Loading...";
+          if (error) return "Error, try a different query";
           if (commands.length === 0) {
             return (
               <h3>
@@ -74,13 +74,23 @@ class CommandList extends Component {
           } else {
             return (
               <Fragment>
-                <div className="label-container">
-                  Showing results for {commands.length} commands
-                </div>
-
-                {commands.map((command, idx) => (
-                  <CommandPreview key={command.id} command={command} />
-                ))}
+                {withCounter && (
+                  <p className="text-muted counter-results">
+                    Showing results for {commands.length} out of 4,263 commands
+                  </p>
+                )}
+                <ListGroup flush>
+                  {commands.map((command, idx) => (
+                    <ListGroupItem key={idx}>
+                      <CommandPreview
+                        key={command.id}
+                        command={command}
+                        compact={compact}
+                        minimal={minimal}
+                      />
+                    </ListGroupItem>
+                  ))}
+                </ListGroup>
               </Fragment>
             );
           }
@@ -92,12 +102,18 @@ class CommandList extends Component {
 
 CommandList.propTypes = {
   query: PropTypes.array,
-  sortBy: PropTypes.string
+  sortBy: PropTypes.string,
+  compact: PropTypes.bool,
+  minimal: PropTypes.bool,
+  withCounter: PropTypes.bool
 };
 
 CommandList.defaultProps = {
   query: [],
-  sortBy: "most_popular"
+  sortBy: "most_popular",
+  compact: false,
+  minimal: false,
+  withCounter: false
 };
 
 export default CommandList;

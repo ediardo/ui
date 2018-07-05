@@ -1,11 +1,10 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Label from "./Label";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import faLinux from "@fortawesome/fontawesome-free-brands/faLinux";
 import faWindows from "@fortawesome/fontawesome-free-brands/faWindows";
 import faApple from "@fortawesome/fontawesome-free-brands/faApple";
-import faExchangeAlt from "@fortawesome/fontawesome-free-solid/faExchangeAlt";
 
 const LabelPlatform = ({ platform }) => {
   var icon, title;
@@ -23,8 +22,15 @@ const LabelPlatform = ({ platform }) => {
       title = "Runs on macOS";
       break;
     default:
-      icon = <FontAwesomeIcon icon={faExchangeAlt} />;
-      title = "Could be run on many OS's";
+      icon = (
+        <Fragment>
+          <FontAwesomeIcon icon={faLinux} />
+          <FontAwesomeIcon icon={faApple} />
+          <FontAwesomeIcon icon={faWindows} />
+        </Fragment>
+      );
+
+      title = "Can be installed and run on many OS's";
   }
   return <Label icon={icon} text={platform} title={title} />;
 };

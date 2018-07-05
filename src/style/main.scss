@@ -15,7 +15,7 @@ body {
   margin-bottom: 75px;
 }
 
-h1,h2 {
+h1,h2,h3,h4, h5 {
   font-weight: 900;
   svg {
     margin-right: 0.2em;
@@ -37,13 +37,22 @@ h4 {
   font-size: 1.2em;
 }
 h5 {
-  font-size: 1.1em;
+  font-size: 1em;
 }
 
 /*
  HEADER
 */
-
+.counter-results {
+  font-size: 0.9rem;
+}
+.list-group-item {
+  padding-left: 0;
+  padding-right: 0;
+  &:hover {
+    background-color: #FAFAFA;
+  }
+}
 main {
   background-color: white;
   padding: 15px 0;
@@ -51,33 +60,19 @@ main {
 
 
 header {
-
-  background-color: $header-bg;
-  border-bottom: 1px solid $header-border-color;
-  color: $header-font-color;
-   
   .logo {
-    height: 40px;
+    height: 45px;
   }
 
-  .btn-link {
-    color: $header-link-color;
-    &:hover {
-      color: $header-link-color-hover;
-      text-decoration: none;
-    }
-  }
   a {
     color: $header-link-color;
     &:hover {
-      color: $header-link-color;
+      color: $header-link-color-hover;
     }
   }
 
   .header-nav-button {
-    &:hover {
-      background-color:lighten($header-bg, 10%);
-    }
+
     .header-nav-button-icon {
       margin-right: 5px;
     }
@@ -101,19 +96,22 @@ header {
   .command-list {
     border-top: 1px solid $light-gray;
   }
-  .command {
-    padding: 0.5rem 0;
-    .command-title {
-      & a {
-        color: black;
-        text-decoration: underline;
-      }
-      font-weight: 900;
-      margin-bottom: 5px;
-    }
-  }
+}
+.badge {
+  font-size: 100%;
 }
 .main-commands, .view-command, .similar-commands {
+  .command-title, .program-name {
+    & a {
+      color: $link-color-title;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    font-weight: 900;
+    margin-bottom: 5px;
+  }
   .command-content {
     font-size: 1.1em;
     padding: 0.5em 0.7em;
