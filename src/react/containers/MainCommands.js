@@ -5,9 +5,9 @@ import { CommandList } from "../components/Command";
 import { ListWithFilter } from "../components/List";
 
 const sortByOptions = [
-  { label: "Top", key: "most_popular" },
-  { label: "Newest", key: "newest" },
-  { label: "Oldest", key: "oldest" }
+  { label: "Most Popular", key: "most_popular" },
+  { label: "Most Recent", key: "newest" },
+  { label: "Most Oldest", key: "oldest" }
 ];
 
 class Content extends Component {

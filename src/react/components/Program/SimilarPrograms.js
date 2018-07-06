@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
-import ProgramPreview from "./ProgramPreview";
-import { ListGroup, ListGroupItem } from "reactstrap";
+import ProgramList from "./ProgramList";
 
 const SIMILAR_PROGRAMS_QUERY = gql`
   query programs($cliName: String!, $platformName: String, $k: Int!) {
@@ -37,19 +36,7 @@ const SimilarPrograms = ({ program, platformName, compact }) => {
         {({ loading, error, data: { programs } }) => {
           if (loading) return "Loading";
           if (error) return `Error: ${error}`;
-          return (
-            <ListGroup flush>
-              {programs.map((program, idx) => (
-                <ListGroupItem key={idx}>
-                  <ProgramPreview
-                    key={program.id}
-                    program={program}
-                    mode="minimal"
-                  />
-                </ListGroupItem>
-              ))}
-            </ListGroup>
-          );
+          return <ProgramList programs={programs} />;
         }}
       </Query>
     </div>

@@ -31,12 +31,11 @@ CommandTitle.defaultProps = {
 
 const CommandPreviewMinimal = ({ command }) => {
   return (
-    <Fragment>
-      <CommandTitle minimal>
-        <a href={`/@${command.author.username}/${command.slugTitle}`}>
-          {command.title}
-        </a>
-      </CommandTitle>
+    <a
+      href={`/@${command.author.username}/${command.slugTitle}`}
+      className="box-link"
+    >
+      <CommandTitle minimal>{command.title}</CommandTitle>
       <CommandInfo>
         <LabelContainer inline={true}>
           <LabelUser user={command.author} />
@@ -44,7 +43,7 @@ const CommandPreviewMinimal = ({ command }) => {
           <LabelMetric metric="views" value={command.totalViews} />
         </LabelContainer>
       </CommandInfo>
-    </Fragment>
+    </a>
   );
 };
 
@@ -52,9 +51,7 @@ const CommandPreviewCompact = ({ command }) => {
   return (
     <Fragment>
       <CommandTitle compact>
-        <a href={`/@${command.author.username}/${command.slugTitle}`}>
-          {command.program.name} / {command.title}
-        </a>
+        {command.program.name} / {command.title}
       </CommandTitle>
       <Fragment>
         <CommandContent>{command.rawContent}</CommandContent>
