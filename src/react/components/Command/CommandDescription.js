@@ -7,7 +7,7 @@ const CommandDescription = ({ description }) => {
     <div className="command-description mt-3">
       <p className={classNames({ "text-muted": description === null })}>
         {description === null && (
-          <span>The author didn't provide a description for this command</span>
+          <span>The author did not provide a description for this command</span>
         )}
       </p>
     </div>
