@@ -46,6 +46,7 @@ h5 {
 .counter-results {
   font-size: 0.9rem;
 }
+
 .list-group-item {
   padding-left: 0;
   padding-right: 0;
@@ -121,6 +122,16 @@ header {
   }
 }
 
+a.box-link {
+  text-decoration: none;
+  &:hover {
+    color: $link-color;
+  [class*="-title"] {
+    text-decoration: underline;
+  }
+}
+
+}
 /*
 Label
 */
@@ -177,6 +188,9 @@ Label
 }
 a {
   color: $link-color;
+  &:hover {
+    color: $light-jade;
+  }
 }
 .content {
   height: calc(100% - #{$footer-height} - #{$header-height});

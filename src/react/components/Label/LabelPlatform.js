@@ -24,15 +24,14 @@ const LabelPlatform = ({ platform }) => {
     default:
       icon = (
         <Fragment>
-          <FontAwesomeIcon icon={faLinux} />
-          <FontAwesomeIcon icon={faApple} />
+          <FontAwesomeIcon icon={faLinux} /> <FontAwesomeIcon icon={faApple} />{" "}
           <FontAwesomeIcon icon={faWindows} />
         </Fragment>
       );
 
       title = "Can be installed and run on many OS's";
   }
-  return <Label icon={icon} text={platform} title={title} />;
+  return <Label icon={icon} title={title} />;
 };
 
 LabelPlatform.propTypes = {

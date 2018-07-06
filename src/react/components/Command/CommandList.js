@@ -81,14 +81,19 @@ class CommandList extends Component {
                 )}
                 <ListGroup flush>
                   {commands.map((command, idx) => (
-                    <ListGroupItem key={idx}>
-                      <CommandPreview
-                        key={command.id}
-                        command={command}
-                        compact={compact}
-                        minimal={minimal}
-                      />
-                    </ListGroupItem>
+                    <a
+                      href={`/@${command.author.username}/${command.slugTitle}`}
+                      className="box-link"
+                    >
+                      <ListGroupItem key={idx}>
+                        <CommandPreview
+                          key={command.id}
+                          command={command}
+                          compact={compact}
+                          minimal={minimal}
+                        />
+                      </ListGroupItem>
+                    </a>
                   ))}
                 </ListGroup>
               </Fragment>

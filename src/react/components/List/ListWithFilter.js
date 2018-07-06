@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import CreatableSelect from "react-select/lib/Creatable";
-import { Button, ButtonGroup } from "reactstrap";
+import {
+  Button,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from "reactstrap";
 import _ from "underscore";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import faQuestionCircle from "@fortawesome/fontawesome-free-solid/faQuestionCircle";
 
 const components = {
   DropdownIndicator: null
@@ -54,18 +62,28 @@ const placeholders = [
 const SortButtons = ({ options, active, handleOnClick, color }) => {
   const buttons = options.map((option, idx) => {
     return (
-      <Button
+      <DropdownItem
         color={color}
         active={option.key === active}
         key={idx}
-        outline
         onClick={() => handleOnClick(option.key)}
       >
         {option.label}
-      </Button>
+      </DropdownItem>
     );
   });
-  return <ButtonGroup>{buttons}</ButtonGroup>;
+  let activeOption = options.filter(option => option.key === active)[0];
+  return (
+    <UncontrolledDropdown>
+      <DropdownToggle caret color="success">
+        {activeOption.label}
+      </DropdownToggle>
+      <DropdownMenu right>
+        <DropdownItem header>Sort by</DropdownItem>
+        {buttons}
+      </DropdownMenu>
+    </UncontrolledDropdown>
+  );
 };
 
 class ListWithFilter extends Component {
@@ -112,7 +130,7 @@ class ListWithFilter extends Component {
     return (
       <div className="list-with-filter">
         <div className="d-flex">
-          <div className=" pr-1 pl-0 flex-grow-1">
+          <div className="pr-1 pl-0 flex-grow-1">
             <CreatableSelect
               components={components}
               inputValue={inputValue}
@@ -130,7 +148,7 @@ class ListWithFilter extends Component {
             />
           </div>
           {sortByOptions.length > 0 && (
-            <div className=" pr-0 pl-1">
+            <div className="pr-1 pl-1 d-none d-sm-block">
               <SortButtons
                 color="success"
                 handleOnClick={this.handleRadioBtnClick}
@@ -139,6 +157,11 @@ class ListWithFilter extends Component {
               />
             </div>
           )}
+          <div className="pr-0 pl-1">
+            <Button color="link" outline>
+              <FontAwesomeIcon icon={faQuestionCircle} />
+            </Button>
+          </div>
         </div>
         {this.props.render(value, sortBy)}
       </div>
