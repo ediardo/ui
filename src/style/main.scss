@@ -544,3 +544,28 @@ a {
 label {
   font-weight: bold;
 }
+
+.modal-dialog.modal-welcome {
+  max-width: 650px;
+
+  .youtube-iframe-wrapper {
+    height: 347px;
+  }  
+
+  .carousel-caption {
+    color: #FAFAFA;
+    text-shadow: 0px 2px 3px #000000;
+  }
+
+  .carousel-control-prev {
+    &:hover {
+      background: linear-gradient(to right, rgba(100,100,100,.9), rgba(255,255,255,0));
+    }
+  }
+  .carousel-control-next {
+    &:hover {
+      background: linear-gradient(to left, rgba(100,100,100,.9), rgba(255,255,255,0));
+    }
+  }
+}
+

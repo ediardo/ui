@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { Button, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { CarouselWelcome } from "../Carousel";
+
+const ModalHeader = ({ children }) => {
+  return (
+    <div className="modal-header">
+      <h3>{children}</h3>
+    </div>
+  );
+};
 
 class ModalWelcome extends Component {
   constructor(props) {
@@ -11,29 +20,22 @@ class ModalWelcome extends Component {
   }
 
   toggle() {
-    document.cookie = "hasSeenWelcome=true";
+    document.cookie = `hasSeenWelcome=true;max-age=${60 * 60 * 24 * 7}`;
     this.setState({ isOpen: !this.state.isOpen });
   }
 
   render() {
     const { isOpen } = this.state;
     return (
-      <Modal isOpen={isOpen}>
+      <Modal isOpen={isOpen} className="modal-welcome">
         <ModalHeader>Welcome to Kommandr!</ModalHeader>
         <ModalBody>
           <p>
             Kommandr is an open source project with the ambitious mission of
-            helping developers, SysAdmins, and students learn how to use the
-            command-line interface. Today you can search for commands by
-            entering free text, platform:, and/or program:.
-            Soon you will be able to create an account to save, comment on,
-            add, and share the commands you find most useful.
+            helping users of the command-line interface to discover, learn
+            about, save, and share commands.
           </p>
-          <p>
-            This project is under development. You can contact us
-            contact@kommandr.com and find us on{" "}
-            <a href="https://github.com/kommandr/kommandr">github.com</a>
-          </p>
+          <CarouselWelcome />
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={this.toggle}>
