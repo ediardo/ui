@@ -11,8 +11,9 @@ const ProgramList = ({ programs }) => {
         <Link
           to={`/manpages/${program.platformName}/${program.name}`}
           className="box-link"
+          key={idx}
         >
-          <ListGroupItem key={idx}>
+          <ListGroupItem>
             <ProgramPreview key={program.id} program={program} mode="minimal" />
           </ListGroupItem>
         </Link>

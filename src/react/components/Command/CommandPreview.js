@@ -31,10 +31,7 @@ CommandTitle.defaultProps = {
 
 const CommandPreviewMinimal = ({ command }) => {
   return (
-    <a
-      href={`/@${command.author.username}/${command.slugTitle}`}
-      className="box-link"
-    >
+    <Fragment>
       <CommandTitle minimal>{command.title}</CommandTitle>
       <CommandInfo>
         <LabelContainer inline={true}>
@@ -43,7 +40,7 @@ const CommandPreviewMinimal = ({ command }) => {
           <LabelMetric metric="views" value={command.totalViews} />
         </LabelContainer>
       </CommandInfo>
-    </a>
+    </Fragment>
   );
 };
 

@@ -8,7 +8,6 @@ import ManPageAuthors from "./ManPageAuthors";
 const ManPageParagraphs = ({ program, mode }) => {
   // get any paragraph whose section name include "option"
   const { paragraphs } = program.manPage;
-  console.log(paragraphs);
 
   var sypnopsysParagraphs = paragraphs.filter(p =>
     p.section.match(/synopsis/i)

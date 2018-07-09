@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Query } from "react-apollo";
 import CommandPreview from "./CommandPreview";
 import gql from "graphql-tag";
-import _ from "underscore";
 import { ListGroup, ListGroupItem } from "reactstrap";
 const COMMANDS_QUERY = gql`
   query commands(
@@ -11,12 +10,14 @@ const COMMANDS_QUERY = gql`
     $programs: [String]
     $platforms: [String]
     $sortBy: String
+    $rawQuery: String
   ) {
     commands(
       title: $title
       programs: $programs
       platforms: $platforms
       sortBy: $sortBy
+      rawQuery: $rawQuery
     ) {
       id
       title
@@ -48,18 +49,30 @@ class CommandList extends Component {
 
   render() {
     const { query, sortBy, compact, minimal, withCounter } = this.props;
-    var title = _.findWhere(query, { key: undefined });
-    if (title !== undefined) {
-      title = title.value;
-    } else {
-      title = "";
-    }
-    const programs = query.filter(q => q.key === "program").map(q => q.value);
-    const platforms = query.filter(q => q.key === "platform").map(q => q.value);
+    var title = "",
+      programs = [],
+      platforms = [],
+      rawQuery = [];
+    query.forEach(q => {
+      if (q.key === undefined) {
+        title = title.value;
+      } else if (q.key === "program") {
+        programs.push(q.value);
+      } else if (q.key === "platform") {
+        platforms.push(q.value);
+      }
+      rawQuery.push(q.label);
+    });
     return (
       <Query
         query={COMMANDS_QUERY}
-        variables={{ title: title, programs, platforms, sortBy }}
+        variables={{
+          title: title,
+          programs,
+          platforms,
+          rawQuery: rawQuery.toString(),
+          sortBy
+        }}
       >
         {({ loading, error, data: { commands } }) => {
           if (loading) return "Loading...";
@@ -84,8 +97,9 @@ class CommandList extends Component {
                     <a
                       href={`/@${command.author.username}/${command.slugTitle}`}
                       className="box-link"
+                      key={idx}
                     >
-                      <ListGroupItem key={idx}>
+                      <ListGroupItem>
                         <CommandPreview
                           key={command.id}
                           command={command}
