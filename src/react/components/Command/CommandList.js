@@ -55,7 +55,7 @@ class CommandList extends Component {
       rawQuery = [];
     query.forEach(q => {
       if (q.key === undefined) {
-        title = title.value;
+        title = q.value;
       } else if (q.key === "program") {
         programs.push(q.value);
       } else if (q.key === "platform") {
